@@ -35,7 +35,7 @@ namespace MSR.Tools.Debugger
 			//configFile = @"E:\repo\postgresql\postgresql.config";
 			//configFile = @"E:\repo\nhibernate\nhibernate.config";
 			//configFile = @"E:\repo\msr\msr.config";
-			configFile = @"E:\repo\wordpress\wordpress.config"; // 13998 revisions
+            configFile = @"D:\NoteProjectsFromGit\couchdb.config"; // 13998 revisions
 			//configFile = @"E:\repo\frund\frund.config";
 			//configFile = @"E:\repo\httpd\httpd.config";
 			//configFile = @"E:\repo\subtle\subtle.config";
@@ -46,11 +46,11 @@ namespace MSR.Tools.Debugger
 			//configFile = @"E:\repo\dovecot\dovecot.config";
 
 			//Debug();
-			//Mapping();
+			Mapping();
 			//PartialMapping();
 			//MapReleases();
 			//MapSyntheticReleases(1, 0.8);
-			GenerateStat();
+			//GenerateStat();
 
 			Console.ReadKey();
 		}
@@ -64,7 +64,7 @@ namespace MSR.Tools.Debugger
 			MappingTool mapper = new MappingTool(configFile);
 
 			mapper.Info();
-			//mapper.Map(true, 1000);
+			//mapper.Map(false, 110);
 			//mapper.Truncate(10);
 			//mapper.Check(1992);
 		}
