@@ -58,8 +58,17 @@ namespace MSR.Data.Entities.Mapping
 					var addedCode = linesByRevision.SingleOrDefault(x => x.Key == revision);
 					if (addedCode != null)
 					{
+                        ///////////////////////////////////////////////////
+
+                        int linesNumber=addedCode.Count();
+                        int[] lines = new int [linesNumber];
+                        for (int i = 0; i < linesNumber; i++)
+                            lines[i] = addedCode.ElementAt(i);
+                        int commentLinesNumber = scmData.CountCommentLines(lines, revision, file.Path);   
+
+                        ///////////////////////////////////////////////////
 						codeBlockExpressions.Add(
-							expression.Code(addedCode.Count())
+                            expression.Code(linesNumber - commentLinesNumber) //просто сделать: минус кол-во строк с комментари€ми
 						);
 					}
 					

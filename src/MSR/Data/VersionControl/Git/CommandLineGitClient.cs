@@ -52,7 +52,15 @@ namespace MSR.Data.VersionControl.Git
 				revision, ToGitPath(path)
 			);
 		}
-		
+
+        public Stream CatFile(string revision)
+        {
+            return RunCommand(
+                "cat-file -p {0}",
+                revision
+            );
+        }
+
 		public string RepositoryPath
 		{
 			get; private set;

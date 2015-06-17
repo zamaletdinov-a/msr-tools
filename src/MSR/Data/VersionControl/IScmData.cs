@@ -15,6 +15,8 @@ namespace MSR.Data.VersionControl
 		IDiff Diff(string revision, string filePath);
 		IDiff Diff(string newPath, string newRevision, string oldPath, string oldRevision);
 		IBlame Blame(string revision, string filePath);
+        int CountCommentLines(int[] lines, string revision, string filePath);
+        //Dictionary<int, bool> Comments(string revision, string filePath);
 		string RevisionByNumber(int revisionNumber);
 		/// <summary>
 		/// Return next revision after specified.

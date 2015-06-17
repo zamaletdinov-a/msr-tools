@@ -48,6 +48,38 @@ namespace MSR.Data.VersionControl.Git
 				return GitBlame.Parse(blame);
 			}
 		}
+        ///////////////////////////////////////////////////
+
+        public int CountCommentLines(int[] lines, string revision, string filePath)
+        {
+            return CatFile_Blob(CatFile_Tree(CatFile_Commit(revision),filePath),lines);
+        }
+
+        private string CatFile_Commit(string revision)
+        {
+            using (var catFile = git.CatFile(revision))
+            {
+                return GitCatFile.ParseCommit(catFile);
+            }
+        }
+
+        private string CatFile_Tree(string hash, string filePath)
+        {
+            using (var catFile = git.CatFile(hash))
+            {
+                return GitCatFile.ParseTree(catFile, filePath);
+            }
+        }
+
+        private int CatFile_Blob(string hash, int[] lines)
+        {
+            using (var catFile = git.CatFile(hash))
+            {
+                return GitCatFile.ParseBlob(catFile, lines);
+            }
+        }
+
+        ///////////////////////////////////////////////////
 		public string RevisionByNumber(int revisionNumber)
 		{
 			if (revisions == null)

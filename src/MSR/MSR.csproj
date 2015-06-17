@@ -118,6 +118,7 @@
     <Compile Include="Data\VersionControl\FileUniDiff.cs" />
     <Compile Include="Data\VersionControl\Git\CommandLineGitClient.cs" />
     <Compile Include="Data\VersionControl\Git\GitBlame.cs" />
+    <Compile Include="Data\VersionControl\Git\GitCatFile.cs" />
     <Compile Include="Data\VersionControl\Git\GitData.cs" />
     <Compile Include="Data\VersionControl\Git\GitLog.cs" />
     <Compile Include="Data\VersionControl\Git\TouchedFileGitAction.cs" />
