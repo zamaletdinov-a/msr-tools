@@ -64,11 +64,19 @@ namespace MSR.Data.Entities.Mapping
                         int[] lines = new int [linesNumber];
                         for (int i = 0; i < linesNumber; i++)
                             lines[i] = addedCode.ElementAt(i);
-                        int commentLinesNumber = scmData.CountCommentLines(lines, revision, file.Path);   
+                        string hashTree = scmData.CatFile_Commit(revision);
+                        string[] parts = file.Path.Split('/');
+                        int partsNumber = parts.Count();
+                        for (int i = 1; i < partsNumber; i++)
+                        {
+                            hashTree = scmData.CatFile_Tree(hashTree, parts[i]);
+                        }
+                        string hashBlob = hashTree;
+                        int commentLinesNumber = scmData.CatFile_Blob(hashBlob, lines, linesNumber);
 
                         ///////////////////////////////////////////////////
 						codeBlockExpressions.Add(
-                            expression.Code(linesNumber - commentLinesNumber) //просто сделать: минус кол-во строк с комментариями
+                            expression.Code(linesNumber - commentLinesNumber) //кол-во строк минус кол-во строк с комментариями
 						);
 					}
 					

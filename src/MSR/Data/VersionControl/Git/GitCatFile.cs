@@ -7,99 +7,86 @@ namespace MSR.Data.VersionControl.Git
     /// <summary>
     /// Keeps the revision last modified each line.///////////////////
     /// </summary>
-    public class GitCatFile : string
+    public class GitCatFile
     {
         /// <summary>
         /// Parse catFileCommit stream.
         /// </summary>
         /// <param name="catFileData">Git catFile in incremental format.</param> ///////
-        /// <returns>Dictionary of line numbers (from 1) with revisions.</returns> ///////////
+        /// <returns>Hash tree.</returns> ///////////
         public static string ParseCommit(Stream catFileData)
         {
             TextReader reader = new StreamReader(catFileData);
-            //GitCatFile catFile = new GitCatFile();
-            string line="";
+            string line;
+            string hashTree="";
 
-            /*while ((line = reader.ReadLine()) != null)
+            while ((line = reader.ReadLine()) != null)
             {
-                if ((line.Length >= 46) && (line.Length < 100))
-                {
-                    string[] parts = line.Split(' ');
-                    if ((parts.Length == 4) && (parts[0].Length == 40))
-                    {
-                        int lines = Convert.ToInt32(parts[3]);
-                        int startLine = Convert.ToInt32(parts[2]);
-                        for (int i = 0; i < lines; i++)
-                        {
-                            catFile.Add(startLine + i, parts[0]);
-                        }
-                    }
-                }
-            }*/
+                string[] parts = line.Split(' ');
+                if (parts[0] == "tree")
+                    hashTree = parts[1];
+            }
 
-            return line;
+            return hashTree;
         }
 
         /// <summary>
-        /// Parse catFileCommit stream.
+        /// Parse catFileTree stream.
         /// </summary>
         /// <param name="catFileData">Git catFile in incremental format.</param> ///////
-        /// <returns>Dictionary of line numbers (from 1) with revisions.</returns> ///////////
+        /// <returns>Hash blob.</returns> ///////////
         public static string ParseTree(Stream catFileData, string filePath)
         {
             TextReader reader = new StreamReader(catFileData);
-            //GitCatFile catFile = new GitCatFile();
-            string line = "";
+            string line;
+            string hash = "";
 
-            /*while ((line = reader.ReadLine()) != null)
+            while ((line = reader.ReadLine()) != null)
             {
-                if ((line.Length >= 46) && (line.Length < 100))
+                if (line.Contains(filePath))
                 {
                     string[] parts = line.Split(' ');
-                    if ((parts.Length == 4) && (parts[0].Length == 40))
-                    {
-                        int lines = Convert.ToInt32(parts[3]);
-                        int startLine = Convert.ToInt32(parts[2]);
-                        for (int i = 0; i < lines; i++)
-                        {
-                            catFile.Add(startLine + i, parts[0]);
-                        }
-                    }
+                    string[] separators = { "\t" };
+                    string[] parts2 = parts[2].Split(separators, StringSplitOptions.None);
+                    hash = parts2[0];
                 }
-            }*/
+            }
 
-            return line;
+            return hash;
         }
 
         /// <summary>
-        /// Parse catFileCommit stream.
+        /// Parse catFileBlob stream.
         /// </summary>
         /// <param name="catFileData">Git catFile in incremental format.</param> ///////
-        /// <returns>Dictionary of line numbers (from 1) with revisions.</returns> ///////////
-        public static int ParseBlob(Stream catFileData, int[] lines)
+        /// <returns>Comment lines number.</returns> ///////////
+        public static int ParseBlob(Stream catFileData, int[] lines, int linesNumber)
         {
             TextReader reader = new StreamReader(catFileData);
-            //GitCatFile catFile = new GitCatFile();
-            int line = 0;
+            string line;
+            int numberLine=1;
+            int i = 0;
+            int commentLinesNumber = 0;
 
-            /*while ((line = reader.ReadLine()) != null)
+            while ((line = reader.ReadLine()) != null)
             {
-                if ((line.Length >= 46) && (line.Length < 100))
+                if (numberLine == lines[i])
                 {
-                    string[] parts = line.Split(' ');
-                    if ((parts.Length == 4) && (parts[0].Length == 40))
+                    string lineWithoutSpaces = line.Trim();
+                    if (lineWithoutSpaces.IndexOf('%') == 0)
                     {
-                        int lines = Convert.ToInt32(parts[3]);
-                        int startLine = Convert.ToInt32(parts[2]);
-                        for (int i = 0; i < lines; i++)
-                        {
-                            catFile.Add(startLine + i, parts[0]);
-                        }
+                        commentLinesNumber++;
                     }
+                    if (i == linesNumber - 1)
+                    {
+                        break;
+                    }
+                    i++;
                 }
-            }*/
+                numberLine++;
+            }
 
-            return line;
+            return commentLinesNumber;
         }
     }
 }

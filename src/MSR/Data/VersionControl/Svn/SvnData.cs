@@ -53,6 +53,30 @@ namespace MSR.Data.VersionControl.Svn
 				return SvnBlame.Parse(blame);
 			}
 		}
+        ///////////////////////////////////////////////////
+
+        public string CatFile_Commit(string revision)
+        {
+            string a = "";
+
+            return a;
+        }
+
+        public string CatFile_Tree(string hash, string filePath)
+        {
+            string a = "";
+
+            return a;
+        }
+
+        public int CatFile_Blob(string hash, int[] lines, int linesNumber)
+        {
+            int a = 1;
+
+            return a;
+        }
+
+        ///////////////////////////////////////////////////
 		public string RevisionByNumber(int revisionNumber)
 		{
 			if (revisionNumber <= numberOfRevisions)

@@ -50,12 +50,7 @@ namespace MSR.Data.VersionControl.Git
 		}
         ///////////////////////////////////////////////////
 
-        public int CountCommentLines(int[] lines, string revision, string filePath)
-        {
-            return CatFile_Blob(CatFile_Tree(CatFile_Commit(revision),filePath),lines);
-        }
-
-        private string CatFile_Commit(string revision)
+        public string CatFile_Commit(string revision)
         {
             using (var catFile = git.CatFile(revision))
             {
@@ -63,7 +58,7 @@ namespace MSR.Data.VersionControl.Git
             }
         }
 
-        private string CatFile_Tree(string hash, string filePath)
+        public string CatFile_Tree(string hash, string filePath)
         {
             using (var catFile = git.CatFile(hash))
             {
@@ -71,11 +66,11 @@ namespace MSR.Data.VersionControl.Git
             }
         }
 
-        private int CatFile_Blob(string hash, int[] lines)
+        public int CatFile_Blob(string hash, int[] lines, int linesNumber)
         {
             using (var catFile = git.CatFile(hash))
             {
-                return GitCatFile.ParseBlob(catFile, lines);
+                return GitCatFile.ParseBlob(catFile, lines, linesNumber);
             }
         }
 

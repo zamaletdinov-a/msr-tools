@@ -47,6 +47,25 @@ namespace MSR.Data.VersionControl
 			}
 			return blames[key];
 		}
+        ///////////////////////////////////////////////////
+
+        public string CatFile_Commit(string revision)
+        {
+            return innerScmData.CatFile_Commit(revision);
+        }
+
+        public string CatFile_Tree(string hash, string filePath)
+        {
+            return innerScmData.CatFile_Tree(hash, filePath);
+        }
+
+        public int CatFile_Blob(string hash, int[] lines, int linesNumber)
+        {
+            return innerScmData.CatFile_Blob(hash, lines, linesNumber);
+        }
+
+        ///////////////////////////////////////////////////
+
 		public string RevisionByNumber(int revisionNumber)
 		{
 			return innerScmData.RevisionByNumber(revisionNumber);
