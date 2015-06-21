@@ -35,7 +35,7 @@ namespace MSR.Tools.Debugger
 			//configFile = @"E:\repo\postgresql\postgresql.config";
 			//configFile = @"E:\repo\nhibernate\nhibernate.config";
 			//configFile = @"E:\repo\msr\msr.config";
-            configFile = @"D:\ProjectsFromGit\MSRGit\couchdb.config"; // 2000 revisions //13998 revisions
+            configFile = @"D:\ProjectsFromGit\MSR_comments-test\comments-test.config"; // 3 revisions //13998 revisions
 			//configFile = @"E:\repo\frund\frund.config";
 			//configFile = @"E:\repo\httpd\httpd.config";
 			//configFile = @"E:\repo\subtle\subtle.config";
@@ -63,10 +63,10 @@ namespace MSR.Tools.Debugger
 		{
 			MappingTool mapper = new MappingTool(configFile);
 
-			mapper.Info();
-			//mapper.Map(false, 2000);
+			//mapper.Info();
+			mapper.Map(false, 3);
 			//mapper.Truncate(10);
-			//mapper.Check(10);
+			//mapper.Check(3);
 		}
 		static void PartialMapping()
 		{

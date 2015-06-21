@@ -101,7 +101,25 @@ namespace MSR.Data.Entities.Mapping
 					))
 					{
 						var linesForRevision = linesByRevision.SingleOrDefault(x => x.Key == existentCode.Revision);
+                        ///////////////////////////////////////////////////
+
+                        int linesNumber = linesForRevision.Count();
+                        int[] lines = new int[linesNumber];
+                        for (int i = 0; i < linesNumber; i++)
+                            lines[i] = linesForRevision.ElementAt(i);
+                        string hashTree = scmData.CatFile_Commit(existentCode.Revision);
+                        string[] parts = file.Path.Split('/');
+                        int partsNumber = parts.Count();
+                        for (int i = 1; i < partsNumber; i++)
+                        {
+                            hashTree = scmData.CatFile_Tree(hashTree, parts[i]);
+                        }
+                        string hashBlob = hashTree;
+                        int commentLinesNumber = scmData.CatFile_Blob(hashBlob, lines, linesNumber);
+
+                        ///////////////////////////////////////////////////
 						double realCodeSize = linesForRevision == null ? 0 : linesForRevision.Count();
+                        realCodeSize -= commentLinesNumber;
 						if (existentCode.CodeSize > realCodeSize)
 						{
 							codeBlockExpressions.Add(
