@@ -35,7 +35,7 @@ namespace MSR.Tools.Debugger
 			//configFile = @"E:\repo\postgresql\postgresql.config";
 			//configFile = @"E:\repo\nhibernate\nhibernate.config";
 			//configFile = @"E:\repo\msr\msr.config";
-            configFile = @"D:\ProjectsFromGit\MSR_comments-test\comments-test.config"; // 3 revisions //13998 revisions
+            configFile = @"D:\ProjectsFromGit\MSRGit\couchdb.config"; // 2000 revisions //13998 revisions
 			//configFile = @"E:\repo\frund\frund.config";
 			//configFile = @"E:\repo\httpd\httpd.config";
 			//configFile = @"E:\repo\subtle\subtle.config";
@@ -63,10 +63,10 @@ namespace MSR.Tools.Debugger
 		{
 			MappingTool mapper = new MappingTool(configFile);
 
-			//mapper.Info();
-			mapper.Map(false, 3);
+			mapper.Info();
+		    //mapper.Map(false, 2000);
 			//mapper.Truncate(10);
-			//mapper.Check(3);
+			//mapper.Check(2000);
 		}
 		static void PartialMapping()
 		{
@@ -88,13 +88,11 @@ namespace MSR.Tools.Debugger
 			mapper.MapReleases(
 				new Dictionary<string,string>()
 				{
-					{ "308aee2d8229cbdd26f29eb04954044592dffa9d", "0.1.0" },
-					{ "4d00ea8121fd373525ecf6fa93243efc91666554", "0.1.1" },
-					{ "f0c86737a276553e72a4ff1b070e8e30eaab50a0", "0.2.0" },
-					{ "0e10ffa1fc83ae4d6b3657266865df4c4a3534da", "0.2.1" },
-					{ "4f9d9cdbefa90a8d3673f94d078f196de2ec788b", "0.3.0" },
-					{ "3bab948571635f5b2bf8c9f8ac7ce867c4e57414", "0.3.1" },
-					{ "368d67c4f309ee9b3f437f9c36845f7a02837d41", "0.3.2" },
+					{ "e8b5079917c0734637e444018c304ea057ad7f32", "Synthetic Release # 1" },
+					{ "37541bbf91d09ad0200f2c26c7a3f79fdf050801", "Synthetic Release # 2" },
+					{ "2e3d4ea2bdb8515772a198a863575ddbd32fd09c", "Synthetic Release # 3" },
+					{ "6e512ec75fba7372babb04988c6cbf5197a26438", "Synthetic Release # 4" },
+					{ "4137a8eb9b2bef436a7e975f4ffe58af49072d94", "Synthetic Release # 5" },
 				}
 			);
 		}

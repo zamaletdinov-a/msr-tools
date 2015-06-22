@@ -24,7 +24,10 @@ namespace MSR.Data.VersionControl.Git
             {
                 string[] parts = line.Split(' ');
                 if (parts[0] == "tree")
+                {
                     hashTree = parts[1];
+                    break;
+                }
             }
 
             return hashTree;
@@ -49,6 +52,7 @@ namespace MSR.Data.VersionControl.Git
                     string[] separators = { "\t" };
                     string[] parts2 = parts[2].Split(separators, StringSplitOptions.None);
                     hash = parts2[0];
+                    break;
                 }
             }
 
